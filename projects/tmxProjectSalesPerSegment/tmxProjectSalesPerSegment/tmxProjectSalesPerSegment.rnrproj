@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <BuildTasksDirectory Condition=" '$(BuildTasksDirectory)' == ''">$(MSBuildProgramFiles32)\MSBuild\Microsoft\Dynamics\AX</BuildTasksDirectory>
+    <Model>tmxProjectSalesPerSegment</Model>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <OutputPath>bin</OutputPath>
+    <SchemaVersion>2.0</SchemaVersion>
+    <GenerateCrossReferences>True</GenerateCrossReferences>
+    <RunAppCheckerRules>False</RunAppCheckerRules>
+    <LogAppcheckerDiagsAsErrors>False</LogAppcheckerDiagsAsErrors>
+    <ProjectGuid>{eb89e582-ca5a-439a-9947-0a4cd636544a}</ProjectGuid>
+    <Name>tmxProjectSalesPerSegment</Name>
+    <RootNamespace>tmxProjectSalesPerSegment</RootNamespace>
+    <StartupType>Class</StartupType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <Configuration>Debug</Configuration>
+    <DBSyncInBuild>False</DBSyncInBuild>
+    <GenerateFormAdaptors>False</GenerateFormAdaptors>
+    <Company>
+    </Company>
+    <Partition>initial</Partition>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DataEntityExpandParentChildRelations>False</DataEntityExpandParentChildRelations>
+    <DataEntityUseLabelTextAsFieldName>False</DataEntityUseLabelTextAsFieldName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Classes" />
+    <Folder Include="Display Menu Items" />
+    <Folder Include="Extended Data Types" />
+    <Folder Include="Forms" />
+    <Folder Include="Label Files" />
+    <Folder Include="Menu Extensions" />
+    <Folder Include="Views" />
+    <Folder Include="Tables" />
+    <Folder Include="Simple Queries" />
+    <Folder Include="Security Privileges" />
+    <Folder Include="Reports" />
+    <Folder Include="Output Menu Items" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AxClass\tmxProjectSalesPerSegmentContract">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegmentContract</Name>
+      <Link>Classes\tmxProjectSalesPerSegmentContract</Link>
+    </Content>
+    <Content Include="AxClass\tmxProjectSalesPerSegmentController">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegmentController</Name>
+      <Link>Classes\tmxProjectSalesPerSegmentController</Link>
+    </Content>
+    <Content Include="AxClass\tmxProjectSalesPerSegmentDP">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegmentDP</Name>
+      <Link>Classes\tmxProjectSalesPerSegmentDP</Link>
+    </Content>
+    <Content Include="AxClass\tmxProjectSalesPerSegmentFromAndToDateValidator">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegmentFromAndToDateValidator</Name>
+      <Link>Classes\tmxProjectSalesPerSegmentFromAndToDateValidator</Link>
+    </Content>
+    <Content Include="AxClass\tmxProjectSalesPerSegmentUIBuilder">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegmentUIBuilder</Name>
+      <Link>Classes\tmxProjectSalesPerSegmentUIBuilder</Link>
+    </Content>
+    <Content Include="AxEdt\tmxProjectSalesPerSegmentProjGroupOrder">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegmentProjGroupOrder</Name>
+      <Link>Extended Data Types\tmxProjectSalesPerSegmentProjGroupOrder</Link>
+    </Content>
+    <Content Include="AxEdt\tmxProjectSalesPerSegmentReportType">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegmentReportType</Name>
+      <Link>Extended Data Types\tmxProjectSalesPerSegmentReportType</Link>
+    </Content>
+    <Content Include="AxForm\tmxProjectSalesPerSegmentSelectedProjGroup">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegmentSelectedProjGroup</Name>
+      <Link>Forms\tmxProjectSalesPerSegmentSelectedProjGroup</Link>
+    </Content>
+    <Content Include="AxLabelFile\tmxProjectSalesPerSegment_en-CA">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegment_en-CA</Name>
+      <Link>Label Files\tmxProjectSalesPerSegment_en-CA</Link>
+    </Content>
+    <Content Include="AxLabelFile\tmxProjectSalesPerSegment_en-US">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegment_en-US</Name>
+      <Link>Label Files\tmxProjectSalesPerSegment_en-US</Link>
+    </Content>
+    <Content Include="AxLabelFile\tmxProjectSalesPerSegment_fr-CA">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegment_fr-CA</Name>
+      <Link>Label Files\tmxProjectSalesPerSegment_fr-CA</Link>
+    </Content>
+    <Content Include="AxMenuExtension\AccountsReceivable.tmxProjectSalesPerSegment">
+      <SubType>Content</SubType>
+      <Name>AccountsReceivable.tmxProjectSalesPerSegment</Name>
+      <Link>Menu Extensions\AccountsReceivable.tmxProjectSalesPerSegment</Link>
+    </Content>
+    <Content Include="AxMenuItemDisplay\tmxProjectSalesPerSegmentSelectedProjGroup">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegmentSelectedProjGroup</Name>
+      <Link>Display Menu Items\tmxProjectSalesPerSegmentSelectedProjGroup</Link>
+    </Content>
+    <Content Include="AxMenuItemOutput\tmxProjectSalesPerSegment">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegment</Name>
+      <Link>Output Menu Items\tmxProjectSalesPerSegment</Link>
+    </Content>
+    <Content Include="AxQuery\tmxFreeTextInvoiceQuery">
+      <SubType>Content</SubType>
+      <Name>tmxFreeTextInvoiceQuery</Name>
+      <Link>Simple Queries\tmxFreeTextInvoiceQuery</Link>
+    </Content>
+    <Content Include="AxQuery\tmxProjInvoiceCostQuery">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceCostQuery</Name>
+      <Link>Simple Queries\tmxProjInvoiceCostQuery</Link>
+    </Content>
+    <Content Include="AxQuery\tmxProjInvoiceEmplQuery">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceEmplQuery</Name>
+      <Link>Simple Queries\tmxProjInvoiceEmplQuery</Link>
+    </Content>
+    <Content Include="AxQuery\tmxProjInvoiceItemQuery">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceItemQuery</Name>
+      <Link>Simple Queries\tmxProjInvoiceItemQuery</Link>
+    </Content>
+    <Content Include="AxQuery\tmxProjInvoiceOnAccQuery">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceOnAccQuery</Name>
+      <Link>Simple Queries\tmxProjInvoiceOnAccQuery</Link>
+    </Content>
+    <Content Include="AxQuery\tmxProjInvoiceRevenueQuery">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceRevenueQuery</Name>
+      <Link>Simple Queries\tmxProjInvoiceRevenueQuery</Link>
+    </Content>
+    <Content Include="AxQuery\tmxProjInvoiceTransUnionQuery">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceTransUnionQuery</Name>
+      <Link>Simple Queries\tmxProjInvoiceTransUnionQuery</Link>
+    </Content>
+    <Content Include="AxQuery\tmxProjInvoiceTransWithRetainedProjInfoQuery">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceTransWithRetainedProjInfoQuery</Name>
+      <Link>Simple Queries\tmxProjInvoiceTransWithRetainedProjInfoQuery</Link>
+    </Content>
+    <Content Include="AxQuery\tmxProjInvoiceTransWithRetainedQuery">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceTransWithRetainedQuery</Name>
+      <Link>Simple Queries\tmxProjInvoiceTransWithRetainedQuery</Link>
+    </Content>
+    <Content Include="AxQuery\tmxProjParentNameQuery">
+      <SubType>Content</SubType>
+      <Name>tmxProjParentNameQuery</Name>
+      <Link>Simple Queries\tmxProjParentNameQuery</Link>
+    </Content>
+    <Content Include="AxQuery\tmxProjParentsQuery">
+      <SubType>Content</SubType>
+      <Name>tmxProjParentsQuery</Name>
+      <Link>Simple Queries\tmxProjParentsQuery</Link>
+    </Content>
+    <Content Include="AxQuery\tmxPSAProjProposalProjQuery">
+      <SubType>Content</SubType>
+      <Name>tmxPSAProjProposalProjQuery</Name>
+      <Link>Simple Queries\tmxPSAProjProposalProjQuery</Link>
+    </Content>
+    <Content Include="AxReport\tmxProjectSalesPerSegment">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegment</Name>
+      <Link>Reports\tmxProjectSalesPerSegment</Link>
+    </Content>
+    <Content Include="AxSecurityPrivilege\tmxProjectSalesPerSegmentGenerate">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegmentGenerate</Name>
+      <Link>Security Privileges\tmxProjectSalesPerSegmentGenerate</Link>
+    </Content>
+    <Content Include="AxSecurityPrivilege\tmxProjectSalesPerSegmentSelectedProjGroupEdit">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegmentSelectedProjGroupEdit</Name>
+      <Link>Security Privileges\tmxProjectSalesPerSegmentSelectedProjGroupEdit</Link>
+    </Content>
+    <Content Include="AxSecurityPrivilege\tmxProjectSalesPerSegmentSelectedProjGroupRead">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegmentSelectedProjGroupRead</Name>
+      <Link>Security Privileges\tmxProjectSalesPerSegmentSelectedProjGroupRead</Link>
+    </Content>
+    <Content Include="AxTable\tmxProjectSalesPerSegmentSelectedProjGroup">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegmentSelectedProjGroup</Name>
+      <Link>Tables\tmxProjectSalesPerSegmentSelectedProjGroup</Link>
+    </Content>
+    <Content Include="AxTable\tmxProjectSalesPerSegmentStagingTmp">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegmentStagingTmp</Name>
+      <Link>Tables\tmxProjectSalesPerSegmentStagingTmp</Link>
+    </Content>
+    <Content Include="AxView\tmxFreeTextInvoiceView">
+      <SubType>Content</SubType>
+      <Name>tmxFreeTextInvoiceView</Name>
+      <Link>Views\tmxFreeTextInvoiceView</Link>
+    </Content>
+    <Content Include="AxView\tmxProjInvoiceCostView">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceCostView</Name>
+      <Link>Views\tmxProjInvoiceCostView</Link>
+    </Content>
+    <Content Include="AxView\tmxProjInvoiceEmplView">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceEmplView</Name>
+      <Link>Views\tmxProjInvoiceEmplView</Link>
+    </Content>
+    <Content Include="AxView\tmxProjInvoiceItemView">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceItemView</Name>
+      <Link>Views\tmxProjInvoiceItemView</Link>
+    </Content>
+    <Content Include="AxView\tmxProjInvoiceOnAccView">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceOnAccView</Name>
+      <Link>Views\tmxProjInvoiceOnAccView</Link>
+    </Content>
+    <Content Include="AxView\tmxProjInvoiceRevenuView">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceRevenuView</Name>
+      <Link>Views\tmxProjInvoiceRevenuView</Link>
+    </Content>
+    <Content Include="AxView\tmxProjInvoiceTransUnionSumView">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceTransUnionSumView</Name>
+      <Link>Views\tmxProjInvoiceTransUnionSumView</Link>
+    </Content>
+    <Content Include="AxView\tmxProjInvoiceTransUnionView">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceTransUnionView</Name>
+      <Link>Views\tmxProjInvoiceTransUnionView</Link>
+    </Content>
+    <Content Include="AxView\tmxProjInvoiceTransWithRetainedProjInfoView">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceTransWithRetainedProjInfoView</Name>
+      <Link>Views\tmxProjInvoiceTransWithRetainedProjInfoView</Link>
+    </Content>
+    <Content Include="AxView\tmxProjInvoiceTransWithRetainedView">
+      <SubType>Content</SubType>
+      <Name>tmxProjInvoiceTransWithRetainedView</Name>
+      <Link>Views\tmxProjInvoiceTransWithRetainedView</Link>
+    </Content>
+    <Content Include="AxView\tmxProjParentNameView">
+      <SubType>Content</SubType>
+      <Name>tmxProjParentNameView</Name>
+      <Link>Views\tmxProjParentNameView</Link>
+    </Content>
+    <Content Include="AxView\tmxProjParentsView">
+      <SubType>Content</SubType>
+      <Name>tmxProjParentsView</Name>
+      <Link>Views\tmxProjParentsView</Link>
+    </Content>
+    <Content Include="AxView\tmxPSAProjProposalProjView">
+      <SubType>Content</SubType>
+      <Name>tmxPSAProjProposalProjView</Name>
+      <Link>Views\tmxPSAProjProposalProjView</Link>
+    </Content>
+    <Content Include="tmxProjectSalesPerSegment.en-CA.label.txt">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegment.en-CA.label.txt</Name>
+      <DependentUpon>AxLabelFile\tmxProjectSalesPerSegment_en-CA</DependentUpon>
+    </Content>
+    <Content Include="tmxProjectSalesPerSegment.en-US.label.txt">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegment.en-US.label.txt</Name>
+      <DependentUpon>AxLabelFile\tmxProjectSalesPerSegment_en-US</DependentUpon>
+    </Content>
+    <Content Include="tmxProjectSalesPerSegment.fr-CA.label.txt">
+      <SubType>Content</SubType>
+      <Name>tmxProjectSalesPerSegment.fr-CA.label.txt</Name>
+      <DependentUpon>AxLabelFile\tmxProjectSalesPerSegment_fr-CA</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <Import Project="$(BuildTasksDirectory)\Microsoft.Dynamics.Framework.Tools.BuildTasks.targets" />
+</Project>

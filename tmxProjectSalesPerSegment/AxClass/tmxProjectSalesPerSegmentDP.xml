@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>tmxProjectSalesPerSegmentDP</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// The <c>tmxProjectSalesPerSegmentContractDP</c> class is the data provider for the <c>tmxProjectSalesPerSegment</c> report.
+/// </summary>
+[SRSReportParameterAttribute(classStr(tmxProjectSalesPerSegmentContract))]
+public class tmxProjectSalesPerSegmentDP extends SRSReportDataProviderPreProcessTempDB
+{
+    tmxProjectSalesPerSegmentStagingTmp     tmp;
+    recId                           primaryFocusRecId;
+    str                             mainFocusName;
+    container                       legalEntityOptions;
+  
+  
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>getLedgerTransStatementTmp</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Gets data from the <c>tmxProjectSalesPerSegmentStagingTmp</c> temporary table.
+    /// </summary>
+    /// <returns>
+    /// Data from the <c>tmxProjectSalesPerSegmentStagingTmp</c> table.
+    /// </returns>
+    [SRSReportDataSetAttribute(tableStr(tmxProjectSalesPerSegmentStagingTmp))]
+    public tmxProjectSalesPerSegmentStagingTmp getLedgerTransStatementTmp()
+    {
+        select tmp;
+
+        return tmp;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>populateDimensionValues</Name>
+				<Source><![CDATA[
+    private void populateDimensionValues(RefRecId _dimensionAttributeRecId, tmxProjectSalesPerSegmentStagingTmp _tmp)
+    {
+        DimensionAttributeValueSetStorage   dimStorage;
+        DimensionDisplayValue               value;
+        ttsbegin;
+        while select forupdate _tmp
+        {
+            dimStorage              = DimensionAttributeValueSetStorage::find(_tmp.DefaultDimension);
+            value                   = dimStorage.getDisplayValueByDimensionAttribute(_dimensionAttributeRecId);
+            _tmp.CustName           = value;
+            _tmp.update();
+        }
+        ttscommit;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>populateDimensionInformationInStaging</Name>
+				<Source><![CDATA[
+    private void populateDimensionInformationInStaging(tmxProjectSalesPerSegmentStagingTmp _tmp, Name _dimensionFocusName, SelectableDataArea _dataAreaId)
+    {
+        // Generate a distinct list of ledger dimensions to generate values for
+        tmxProjectSalesPerSegmentStagingTmp querySource;
+        this.setUserConnection(querySource);
+
+        insert_recordset querySource
+            (DefaultDimension)
+        select DefaultDimension from _tmp
+        group by DefaultDimension
+            where
+            _tmp.InvoiceDataAreaId == _dataAreaId;
+
+        this.populateDimensionValues(primaryFocusRecId, querySource);
+
+        // Update _ledgerTransStatementTmp with the main focus value
+        update_recordset _tmp setting
+            MainFocusValue = querySource.CustName
+            join querySource
+                where 
+                    querySource.DefaultDimension    == _tmp.DefaultDimension &&
+                    _tmp.InvoiceDataAreaId          == _dataAreaId;
+        
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>deleteNotEligibleMainFocus</Name>
+				<Source><![CDATA[
+    private void deleteNotEligibleMainFocus(tmxProjectSalesPerSegmentStagingTmp  _tmp, SelectableDataArea _dataAreaId)
+    {
+        tmxProjectSalesPerSegmentSelectedProjGroup groups;
+
+        // Delete from _ledgerTransStatementTmp all records without eligible main focus values
+        // assuming that all fin dims are of ProjectGroup here
+        delete_from _tmp
+            where
+            _tmp.InvoiceDataAreaId == _dataAreaId
+            notexists join groups
+                where 
+                    groups.ProjGroupId  == _tmp.MainFocusValue &&
+                    groups.DataAreaId   == _tmp.InvoiceDataAreaId;
+                    
+
+        // Update _ledgerTransStatementTmp with the main focus value sort order
+        update_recordset _tmp setting
+            MainFocusOrder = groups.DisplayOrder
+            join groups
+                where 
+                    groups.ProjGroupId  == _tmp.MainFocusValue &&
+                    groups.DataAreaId   == _tmp.InvoiceDataAreaId &&
+                    _tmp.InvoiceDataAreaId                          == _dataAreaId;
+
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>populateFreeTextInvoices</Name>
+				<Source><![CDATA[
+    protected final void populateFreeTextInvoices(          str                             _companyName,
+                                                            tmxProjectSalesPerSegmentStagingTmp     _tmp,
+                                                            FromDate                        _startDate,
+                                                            ToDate                          _endDate,
+                                                            SelectableDataArea              _dataAreaId
+                                                    )
+    {
+        tmxFreeTextInvoiceView view;
+        insert_recordset tmp
+        (
+            Year,
+            MonthsOfYear,
+            InvoiceDataAreaId,
+            AmountCurMISC,
+            TotalAmountCur,
+            CurrencyCode,
+            InvoiceDate,
+            InvoiceId,
+            InvoiceAccount,
+            CustName,
+            ProjId,
+            CompanyName
+        )
+        select
+            Year,
+            MonthsOfYear,
+            DataAreaId,
+            SalesBalance,
+            SalesBalance,
+            CurrencyCode,
+            InvoiceDate,
+            InvoiceId,
+            InvoiceAccount,
+            CustName,
+            InvoiceProjId,
+            _companyName
+            from view
+            where
+                view.InvoiceDate >= _startDate &&
+                view.InvoiceDate <= _endDate &&
+                view.DataAreaId  == _dataAreaId;
+            ;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>populateProjInvoiceSales</Name>
+				<Source><![CDATA[
+    protected final void populateProjInvoiceSales(          str                             _companyName,
+                                                            tmxProjectSalesPerSegmentStagingTmp     _tmp,
+                                                            FromDate                        _startDate,
+                                                            ToDate                          _endDate,
+                                                            SelectableDataArea              _dataAreaId    
+                                                    )
+    {
+        tmxProjInvoiceTransWithRetainedProjInfoView view;
+
+        insert_recordset tmp
+        (
+            Year,
+            MonthsOfYear,
+            InvoiceDataAreaId,
+            DefaultDimension,
+            AmountCur,
+            TotalAmountCur,
+            AmountCurHoldback,
+            CurrencyCode,
+            InvoiceDate,
+            InvoiceId,
+            InvoiceAccount,
+            CustName,
+            Voucher,
+            ProjId,
+            ProjName,
+            CompanyName
+        )
+            select
+            Year,
+            MonthsOfYear,
+            DataAreaId,
+            DefaultDimension,
+            Amount,
+            Amount,
+            AmountRetained,
+            CurrencyCode,
+            InvoiceDate,
+            ProjInvoiceId,
+            CustAccountNum,
+            CustName,
+            LedgerVoucher,
+            ProjId,
+            ProjNameParent, // here we need to get the project parent project name (up to 4 levels in the hierarchy)
+            _companyName
+            from view
+            where
+                view.InvoiceDate >= _startDate &&
+                view.InvoiceDate <= _endDate &&
+                view.DataAreaId  == _dataAreaId;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>addEmptyByMonth</Name>
+				<Source><![CDATA[
+    private void addEmptyByMonth(DataAreaId _id, tmxProjectSalesPerSegmentStagingTmp _tmp, FromDate _fromDate, ToDate _toDate)
+    {
+        int                         month;
+        int                         year;
+        FromDate                    monthStart;
+        ToDate                      monthEnd;
+        // Summarize by month
+        monthStart      = dateStartMth(_fromDate);
+        monthEnd        = dateEndMth(_fromDate);
+        
+       
+        // Loop until all months have been summarized
+        while (monthStart <= _toDate)
+        {
+            month       = mthOfYr(monthStart);
+            year        = year(monthStart);
+            // insert empty record
+
+            // Move to the next month
+            monthStart  = dateStartMth(monthEnd + 1);
+            monthEnd    = dateEndMth(monthStart);
+
+            _tmp.InvoiceDataAreaId  = _id;
+            _tmp.InvoiceDate        = monthStart;
+            _tmp.Year               = Year;
+            _tmp.MonthsOfYear       = this.getMonthsOfYear(month);
+            _tmp.insert();
+        }
+
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>addEmptyFocus</Name>
+				<Source><![CDATA[
+    private void addEmptyFocus(DataAreaId _id, tmxProjectSalesPerSegmentStagingTmp _tmp, date _startDate)
+    {
+        tmxProjectSalesPerSegmentSelectedProjGroup  focus;
+        int                                 month       = mthOfYr(_startDate);
+        int                                 year        = year(_startDate);
+       
+        // Loop until all months have been summarized
+        while select focus
+        {
+            _tmp.InvoiceDataAreaId  = _id;
+            _tmp.InvoiceDate        = _startDate;
+            _tmp.Year               = Year;
+            _tmp.MainFocusValue     = focus.ProjGroupId;
+            _tmp.MainFocusOrder     = focus.DisplayOrder;
+            _tmp.MonthsOfYear       = this.getMonthsOfYear(month);
+            _tmp.insert();
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getMonthsOfYear</Name>
+				<Source><![CDATA[
+    private MonthsOfYear getMonthsOfYear(MonthsOfYear _month)
+    {
+        SysDictEnum dictEnum = new SysDictEnum(enumNum(MonthsOfYear));
+        return  dictEnum.index2Value(_month);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>processReport</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Processes the report business logic.
+    /// </summary>
+    public void processReport()
+    {
+        tmxProjectSalesPerSegmentContract       dc;
+        DimensionsTransTableType        dimensionsTransTableType;
+        FromDate                        fromDate;
+        ToDate                          toDate;
+        List                            legalEntityList;
+        ListEnumerator                  legalEntityListEnumerator;
+        SelectableDataArea              companyId;
+        str                             companyName;
+
+        dc                          = this.parmDataContract() as tmxProjectSalesPerSegmentContract;
+        mainFocusName               = dc.parmPrimaryDimensionFocus();
+        fromDate                    = dc.parmFromDate();
+        toDate                      = dc.parmToDate();
+       
+        this.setUserConnection(tmp);
+        
+        primaryFocusRecId = DimensionAttribute::findByName(mainFocusName).RecId;
+        
+        // getting all selected companies from the report query
+        legalEntityList             = con2List(str2con(dc.parmLegalEntityOptions()));
+        legalEntityListEnumerator   = legalEntityList.getEnumerator();
+
+        while (legalEntityListEnumerator.moveNext())
+        {
+            companyId   = legalEntityListEnumerator.current();
+            companyName = CompanyInfo::findDataArea(companyId).name();
+            changecompany(companyId)
+            {
+                // Populate the base processing table with data from the appropriate source table
+                this.populateProjInvoiceSales(companyName, tmp, fromDate, toDate, companyId);
+                //this.printT('populateProjInvoiceSales', companyId);
+                // Fill in the focus names and descriptions
+                this.populateDimensionInformationInStaging(tmp, mainFocusName, companyId);
+                //this.printT('populateDimensionInformationInStaging', companyId);
+                // now leave here selected project groups only
+                this.deleteNotEligibleMainFocus(tmp, companyId);
+                //this.printT('deleteNotEligibleMainFocus', companyId);
+                // add all free text invoices MISC
+                this.populateFreeTextInvoices(companyName, tmp, fromDate, toDate, companyId);
+                //this.printT('populateFreeTextInvoices', companyId);
+                this.addEmptyByMonth(companyId, tmp, fromDate, toDate);
+                //this.printT('addEmptyByMonth', companyId);
+                this.addEmptyFocus(companyId, tmp, fromDate);
+                //this.printT('addEmptyFocus', companyId);
+            }
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>setUserConnection</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Sets the user connection on the table buffer.
+    /// </summary>
+    /// <param name="_common">
+    /// The table buffer.
+    /// </param>
+    private void setUserConnection(Common _common)
+    {
+        UserConnection con = this.parmUserConnection();
+
+        if (con)
+        {
+            _common.setConnection(con);
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

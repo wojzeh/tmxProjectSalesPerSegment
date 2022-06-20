@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxQuery xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns=""
+	i:type="AxQuerySimple">
+	<Name>tmxProjInvoiceTransWithRetainedQuery</Name>
+	<SourceCode>
+		<Methods>
+			<Method>
+				<Name>classDeclaration</Name>
+				<Source><![CDATA[
+    [Query]
+    public class tmxProjInvoiceTransWithRetainedQuery extends QueryRun
+    {
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+	<AllowCrossCompany>Yes</AllowCrossCompany>
+	<DataSources>
+		<AxQuerySimpleRootDataSource>
+			<Name>tmxProjInvoiceTransUnionSumView</Name>
+			<Table>tmxProjInvoiceTransUnionSumView</Table>
+			<DataSources>
+				<AxQuerySimpleEmbeddedDataSource>
+					<Name>tmxPSAProjProposalProjView</Name>
+					<Table>tmxPSAProjProposalProjView</Table>
+					<DataSources />
+					<DerivedDataSources />
+					<Fields>
+						<AxQuerySimpleDataSourceField>
+							<Name>InvoiceDate</Name>
+							<Field>InvoiceDate</Field>
+						</AxQuerySimpleDataSourceField>
+						<AxQuerySimpleDataSourceField>
+							<Name>InvoicedNow</Name>
+							<Field>InvoicedNow</Field>
+						</AxQuerySimpleDataSourceField>
+						<AxQuerySimpleDataSourceField>
+							<Name>ProjId</Name>
+							<Field>ProjId</Field>
+						</AxQuerySimpleDataSourceField>
+						<AxQuerySimpleDataSourceField>
+							<Name>ProjInvoiceId</Name>
+							<Field>ProjInvoiceId</Field>
+						</AxQuerySimpleDataSourceField>
+						<AxQuerySimpleDataSourceField>
+							<Name>ProposalId</Name>
+							<Field>ProposalId</Field>
+						</AxQuerySimpleDataSourceField>
+						<AxQuerySimpleDataSourceField>
+							<Name>RetainedNow</Name>
+							<Field>RetainedNow</Field>
+						</AxQuerySimpleDataSourceField>
+					</Fields>
+					<Ranges>
+						<AxQuerySimpleDataSourceRange>
+							<Name>RetainedNow</Name>
+							<Field>RetainedNow</Field>
+							<Value>!=0</Value>
+						</AxQuerySimpleDataSourceRange>
+					</Ranges>
+					<JoinMode>OuterJoin</JoinMode>
+					<Relations>
+						<AxQuerySimpleDataSourceRelation>
+							<Name>QueryDataSourceRelation1</Name>
+							<Field>InvoiceDate</Field>
+							<JoinDataSource>tmxProjInvoiceTransUnionSumView</JoinDataSource>
+							<RelatedField>InvoiceDate</RelatedField>
+						</AxQuerySimpleDataSourceRelation>
+						<AxQuerySimpleDataSourceRelation>
+							<Name>QueryDataSourceRelation1Copy1</Name>
+							<Field>ProjId</Field>
+							<JoinDataSource>tmxProjInvoiceTransUnionSumView</JoinDataSource>
+							<RelatedField>ProjId</RelatedField>
+						</AxQuerySimpleDataSourceRelation>
+						<AxQuerySimpleDataSourceRelation>
+							<Name>QueryDataSourceRelation1Copy1Copy1</Name>
+							<Field>ProjInvoiceId</Field>
+							<JoinDataSource>tmxProjInvoiceTransUnionSumView</JoinDataSource>
+							<RelatedField>ProjInvoiceId</RelatedField>
+						</AxQuerySimpleDataSourceRelation>
+					</Relations>
+				</AxQuerySimpleEmbeddedDataSource>
+			</DataSources>
+			<DerivedDataSources />
+			<Fields>
+				<AxQuerySimpleDataSourceField>
+					<Name>Amount</Name>
+					<Field>Amount</Field>
+				</AxQuerySimpleDataSourceField>
+				<AxQuerySimpleDataSourceField>
+					<Name>CurrencyCode</Name>
+					<Field>CurrencyCode</Field>
+				</AxQuerySimpleDataSourceField>
+				<AxQuerySimpleDataSourceField>
+					<Name>CustAccountNum</Name>
+					<Field>CustAccountNum</Field>
+				</AxQuerySimpleDataSourceField>
+				<AxQuerySimpleDataSourceField>
+					<Name>DefaultDimension</Name>
+					<Field>DefaultDimension</Field>
+				</AxQuerySimpleDataSourceField>
+				<AxQuerySimpleDataSourceField>
+					<Name>InvoiceDate</Name>
+					<Field>InvoiceDate</Field>
+				</AxQuerySimpleDataSourceField>
+				<AxQuerySimpleDataSourceField>
+					<Name>LedgerVoucher</Name>
+					<Field>LedgerVoucher</Field>
+				</AxQuerySimpleDataSourceField>
+				<AxQuerySimpleDataSourceField>
+					<Name>ProjContractId</Name>
+					<Field>ProjContractId</Field>
+				</AxQuerySimpleDataSourceField>
+				<AxQuerySimpleDataSourceField>
+					<Name>ProjId</Name>
+					<Field>ProjId</Field>
+				</AxQuerySimpleDataSourceField>
+				<AxQuerySimpleDataSourceField>
+					<Name>ProjInvoiceId</Name>
+					<Field>ProjInvoiceId</Field>
+				</AxQuerySimpleDataSourceField>
+			</Fields>
+			<Ranges />
+			<GroupBy />
+			<Having />
+			<OrderBy />
+		</AxQuerySimpleRootDataSource>
+	</DataSources>
+</AxQuery>

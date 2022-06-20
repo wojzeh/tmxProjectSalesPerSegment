@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxView xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>tmxProjInvoiceTransUnionSumView</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class tmxProjInvoiceTransUnionSumView extends common
+{
+}
+
+]]></Declaration>
+		<Methods />
+	</SourceCode>
+	<SubscriberAccessLevel>
+		<Read>Allow</Read>
+	</SubscriberAccessLevel>
+	<FieldGroups>
+		<AxTableFieldGroup>
+			<Name>AutoReport</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoLookup</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoIdentification</Name>
+			<AutoPopulate>Yes</AutoPopulate>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoSummary</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoBrowse</Name>
+			<Fields />
+		</AxTableFieldGroup>
+	</FieldGroups>
+	<Fields>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>Amount</Name>
+			<Aggregation>Sum</Aggregation>
+			<DataField>Amount</DataField>
+			<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>CurrencyCode</Name>
+			<DataField>CurrencyCode</DataField>
+			<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>CustAccountNum</Name>
+			<DataField>CustAccountNum</DataField>
+			<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>DefaultDimension</Name>
+			<DataField>DefaultDimension</DataField>
+			<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>InvoiceDate</Name>
+			<DataField>InvoiceDate</DataField>
+			<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>LedgerVoucher</Name>
+			<DataField>LedgerVoucher</DataField>
+			<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>ProjContractId</Name>
+			<DataField>ProjContractId</DataField>
+			<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>ProjId</Name>
+			<DataField>ProjId</DataField>
+			<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>ProjInvoiceId</Name>
+			<DataField>ProjInvoiceId</DataField>
+			<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+		</AxViewField>
+	</Fields>
+	<Indexes />
+	<Mappings />
+	<Relations />
+	<StateMachines />
+	<ViewMetadata>
+		<Name>Metadata</Name>
+		<SourceCode>
+			<Methods />
+		</SourceCode>
+		<AllowCrossCompany>Yes</AllowCrossCompany>
+		<DataSources>
+			<AxQuerySimpleRootDataSource>
+				<Name>tmxProjInvoiceTransUnionView</Name>
+				<DynamicFields>Yes</DynamicFields>
+				<Table>tmxProjInvoiceTransUnionView</Table>
+				<DataSources />
+				<DerivedDataSources />
+				<Fields />
+				<Ranges />
+				<GroupBy>
+					<AxQuerySimpleGroupByField>
+						<Name>CurrencyCode</Name>
+						<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+						<Field>CurrencyCode</Field>
+					</AxQuerySimpleGroupByField>
+					<AxQuerySimpleGroupByField>
+						<Name>CustAccountNum</Name>
+						<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+						<Field>CustAccountNum</Field>
+					</AxQuerySimpleGroupByField>
+					<AxQuerySimpleGroupByField>
+						<Name>DefaultDimension</Name>
+						<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+						<Field>DefaultDimension</Field>
+					</AxQuerySimpleGroupByField>
+					<AxQuerySimpleGroupByField>
+						<Name>InvoiceDate</Name>
+						<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+						<Field>InvoiceDate</Field>
+					</AxQuerySimpleGroupByField>
+					<AxQuerySimpleGroupByField>
+						<Name>LedgerVoucher</Name>
+						<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+						<Field>LedgerVoucher</Field>
+					</AxQuerySimpleGroupByField>
+					<AxQuerySimpleGroupByField>
+						<Name>ProjContractId</Name>
+						<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+						<Field>ProjContractId</Field>
+					</AxQuerySimpleGroupByField>
+					<AxQuerySimpleGroupByField>
+						<Name>ProjId</Name>
+						<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+						<Field>ProjId</Field>
+					</AxQuerySimpleGroupByField>
+					<AxQuerySimpleGroupByField>
+						<Name>ProjInvoiceId</Name>
+						<DataSource>tmxProjInvoiceTransUnionView</DataSource>
+						<Field>ProjInvoiceId</Field>
+					</AxQuerySimpleGroupByField>
+				</GroupBy>
+				<Having />
+				<OrderBy />
+			</AxQuerySimpleRootDataSource>
+		</DataSources>
+	</ViewMetadata>
+</AxView>

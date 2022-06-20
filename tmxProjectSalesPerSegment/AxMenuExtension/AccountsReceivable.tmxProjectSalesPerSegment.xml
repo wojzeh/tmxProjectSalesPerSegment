@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxMenuExtension xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="Microsoft.Dynamics.AX.Metadata.V1">
+	<Name>AccountsReceivable.tmxProjectSalesPerSegment</Name>
+	<Customizations />
+	<Elements>
+		<AxMenuExtensionElement xmlns="">
+			<MenuElement xmlns=""
+				i:type="AxMenuElementSubMenu">
+				<Name>tmxReports</Name>
+				<Label>@tmxProjectSalesPerSegment:ProjSalesReports</Label>
+				<Elements>
+					<AxMenuElement xmlns=""
+						i:type="AxMenuElementMenuItem">
+						<Name>tmxProjectSalesPerSegment</Name>
+						<MenuItemName>tmxProjectSalesPerSegment</MenuItemName>
+						<MenuItemType>Output</MenuItemType>
+					</AxMenuElement>
+					<AxMenuElement xmlns=""
+						i:type="AxMenuElementMenuItem">
+						<Name>tmxProjectSalesPerSegmentSelectedProjGroup</Name>
+						<MenuItemName>tmxProjectSalesPerSegmentSelectedProjGroup</MenuItemName>
+					</AxMenuElement>
+				</Elements>
+			</MenuElement>
+		</AxMenuExtensionElement>
+	</Elements>
+	<MenuElementModifications />
+	<PropertyModifications />
+</AxMenuExtension>

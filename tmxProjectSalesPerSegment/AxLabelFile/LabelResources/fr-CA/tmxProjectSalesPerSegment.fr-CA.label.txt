@@ -1,0 +1,30 @@
+﻿ProjSalesReports=État Ventes de projet par ségment
+ ;FDD-089
+SalesBySegmentHoldBack=Holdback
+ ;FDD-089
+SalesBySegmentHoldMisc=Misc
+ ;FDD-089
+SalesBySegmentHoldTotalSales=Ventes totales
+ ;FDD-089
+SalesBySegmentReport=Ventes de projet par ségment
+ ;FDD-089
+SalesBySegmentReportByInvoice=par facture
+ ;FDD-089
+SalesBySegmentReportByMonth=par mois
+ ;FDD-089
+SalesBySegmentReportGenerate=Imprimer Ventes de projet par ségment
+ ;FDD-089
+SalesBySegmentReportPeriod=Factures de %1 à %2
+ ;FDD-089
+SalesBySegmentReportTitle=ÉTAT SOMMAIRES DE FACTURATION DES PROJETS
+ ;FDD-089
+SalesBySegmentReportTypeHelp=Groupes des factures par mois
+ ;FDD-089
+SalesBySegmentSelectedProjGroup=Groupes de projet pour État Ventes de projet par ségment
+ ;FDD-089
+SalesBySegmentSelectedProjGroupDelete=Maintenir Groupes de projet pour État Ventes de projet par ségment
+ ;FDD-089
+SalesBySegmentSelectedProjGroupOrderHelp=En quel ordre d'imprimer les groupes de projet dans l'État Ventes de projet par ségment
+ ;FDD-089
+SalesBySegmentSelectedProjGroupRead=Afficher Groupes de projet pour l'État Ventes de projet par ségment
+ ;FDD-089

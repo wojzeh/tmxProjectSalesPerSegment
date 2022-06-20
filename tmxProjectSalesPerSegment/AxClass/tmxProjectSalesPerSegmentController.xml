@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>tmxProjectSalesPerSegmentController</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+///    The <c>tmxProjectSalesPerSegmentController</c> class is the controller class for the
+///    <c>tmxProjectSalesPerSegment</c> SRS Report.
+/// </summary>
+public class tmxProjectSalesPerSegmentController extends SrsReportRunController
+{
+    #DEFINE.PrimaryDimensionFocusName('ProjectGroup')
+
+    private date userPreferredCurrentDate = DateTimeUtil::getSystemDate(DateTimeUtil::getUserPreferredTimeZone());
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>prePromptModifyContract</Name>
+				<Source><![CDATA[
+    /// <summary>
+    ///    Sets default parameter values before the user is prompted for input.
+    /// </summary>
+    protected void prePromptModifyContract()
+    {
+        tmxProjectSalesPerSegmentContract   dc = this.parmReportContract().parmRdpContract() as tmxProjectSalesPerSegmentContract;
+
+        if (!dc.parmFromDate())
+        {
+            // Set the default value for the From date to the first day of the current fiscal year.Apply the default value.
+            dc.parmFromDate(this.getPrePromptFromDateValue());
+        }
+
+        if (!dc.parmToDate())
+        {
+            // Set the default value for the To date to the last day of the current fiscal year.Apply the default value.
+            dc.parmToDate(this.getPrePromptToDateValue());
+        }
+
+        if (!dc.parmPrimaryDimensionFocus())
+        {
+            // Set the default value for the dimension focus group
+            dc.parmPrimaryDimensionFocus(#PrimaryDimensionFocusName);
+        }
+
+        if (!dc.parmLegalEntityOptions())
+        {
+            // Set the default value for the legal entity selection
+            dc.parmLegalEntityOptions(con2str([curExt()]));
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getPrePromptFromDateValue</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// inits From date
+    /// </summary>
+    /// <returns>From date</returns>
+    private TransDate getPrePromptFromDateValue()
+    {
+        TransDate fromDate;
+
+        // Get the default value for the From date to the first day of the current fiscal period.
+        fromDate = FiscalCalendars::findFirstDayOfMonth(Ledger::fiscalCalendar(), userPreferredCurrentDate);
+
+        return FromDate;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getPrePromptToDateValue</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Inits To date
+    /// </summary>
+    /// <returns>To date</returns>
+    private TransDate getPrePromptToDateValue()
+    {
+        TransDate toDate;
+
+        // Get the default value for the To date to the last day of the current fiscal period.
+        toDate = FiscalCalendars::findLastDayOfMonth(Ledger::fiscalCalendar(), userPreferredCurrentDate);
+
+        return ToDate;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>preRunModifyContract</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Changes the report contract before the report is executed.
+    /// </summary>
+    protected void preRunModifyContract()
+    {
+        tmxProjectSalesPerSegmentContract   dc;
+        str                         reportTitle;
+        str                         reportCompany;
+        SelectableDataArea          companyId;
+        Name                        companyName;
+        Counter                     i;
+        List                        legalEntityList;
+        ListEnumerator              legalEntityListEnumerator;
+        container                   legalEntityOptions;
+
+        dc                  = this.parmReportContract().parmRdpContract() as tmxProjectSalesPerSegmentContract;
+        legalEntityOptions  = str2con(dc.parmLegalEntityOptions());
+
+        // Default current company if there were no company specifications provided to the API.
+        if (legalEntityOptions == conNull())
+        {
+            legalEntityOptions = [curExt()];
+            dc.parmLegalEntityOptions(con2str(legalEntityOptions));
+        }
+        // Prepare the title.
+        reportTitle = strfmt('%1 %2', "@tmxProjectSalesPerSegment:SalesBySegmentReportTitle", dc.parmGroupedByMonth() ? "@tmxProjectSalesPerSegment:SalesBySegmentReportByMonth" : "@tmxProjectSalesPerSegment:SalesBySegmentReportByInvoice");
+
+        this.parmReportContract().parmReportCaption(reportTitle);
+        dc.parmReportTitle(reportTitle);
+        
+        // getting all selected companies from the report query
+        legalEntityList             = con2List(legalEntityOptions);
+        legalEntityListEnumerator   = legalEntityList.getEnumerator();
+
+        while (legalEntityListEnumerator.moveNext())
+        {
+            i++;
+            if(i>=2)
+            {
+                // if more than one company selected, we will print "All companies" instead of a particualr id+name
+                break;
+            }
+            companyId   = legalEntityListEnumerator.current();
+            companyName = CompanyInfo::findDataArea(companyId).name();
+        }
+        if(i == 1)
+        {
+            reportCompany = strFmt('%1 %2', companyId, companyName);
+        }
+        else
+        {
+            reportCompany = "@SYS316983";
+        }
+
+        dc.parmReportCompany(reportCompany);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Entry point
+    /// </summary>
+    /// <param name = "_args">Args</param>
+    public static void main(Args _args)
+    {
+        tmxProjectSalesPerSegmentController controller = new tmxProjectSalesPerSegmentController();
+
+        controller.parmReportName(ssrsReportStr(tmxProjectSalesPerSegment, Report));
+        controller.parmArgs(_args);
+        controller.parmDialogCaption("@tmxProjectSalesPerSegment:SalesBySegmentReport");
+        controller.startOperation();
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

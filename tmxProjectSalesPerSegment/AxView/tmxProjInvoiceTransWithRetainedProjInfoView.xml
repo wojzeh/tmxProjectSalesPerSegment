@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxView xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>tmxProjInvoiceTransWithRetainedProjInfoView</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class tmxProjInvoiceTransWithRetainedProjInfoView extends common
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>invoiceDateYear</Name>
+				<Source><![CDATA[
+    private static str invoiceDateYear()
+    {
+        return strFmt("year(%1)",
+            SysComputedColumn::returnField(
+                                            tableStr(tmxProjInvoiceTransWithRetainedProjInfoView),
+                                            identifierStr(tmxProjInvoiceTransWithRetainedView),
+                                            fieldStr(tmxProjInvoiceTransWithRetainedView, InvoiceDate))
+                        );
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>invoiceDateMonth</Name>
+				<Source><![CDATA[
+    private static str invoiceDateMonth()
+    {
+        return strFmt("month(%1)",
+            SysComputedColumn::returnField( tableStr(tmxProjInvoiceTransWithRetainedProjInfoView),
+                                            identifierStr(tmxProjInvoiceTransWithRetainedView),
+                                            fieldStr(tmxProjInvoiceTransWithRetainedView, InvoiceDate))
+                            );
+                        
+     
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>retainedNowNotNull</Name>
+				<Source><![CDATA[
+    private static str retainedNowNotNull()
+    {
+        str ret;
+        str filedValue = SysComputedColumn::returnField(tableStr(tmxProjInvoiceTransWithRetainedProjInfoView),
+                                                        identifierStr(tmxProjInvoiceTransWithRetainedView),
+                                                        fieldStr(tmxProjInvoiceTransWithRetainedView, RetainedNow));
+
+        ret = SysComputedColumn::if(SysComputedColumn::isNullExpression(filedValue), SysComputedColumn::returnLiteral("0"), filedValue);
+        return ret;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+	<SubscriberAccessLevel>
+		<Read>Allow</Read>
+	</SubscriberAccessLevel>
+	<Query>tmxProjInvoiceTransWithRetainedProjInfoQuery</Query>
+	<FieldGroups>
+		<AxTableFieldGroup>
+			<Name>AutoReport</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoLookup</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoIdentification</Name>
+			<AutoPopulate>Yes</AutoPopulate>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoSummary</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoBrowse</Name>
+			<Fields />
+		</AxTableFieldGroup>
+	</FieldGroups>
+	<Fields>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>Amount</Name>
+			<DataField>Amount</DataField>
+			<DataSource>tmxProjInvoiceTransWithRetainedView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>CurrencyCode</Name>
+			<DataField>CurrencyCode</DataField>
+			<DataSource>tmxProjInvoiceTransWithRetainedView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>CustAccountNum</Name>
+			<DataField>CustAccountNum</DataField>
+			<DataSource>tmxProjInvoiceTransWithRetainedView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>DefaultDimension</Name>
+			<DataField>DefaultDimension</DataField>
+			<DataSource>tmxProjInvoiceTransWithRetainedView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>InvoiceDate</Name>
+			<DataField>InvoiceDate</DataField>
+			<DataSource>tmxProjInvoiceTransWithRetainedView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>LedgerVoucher</Name>
+			<DataField>LedgerVoucher</DataField>
+			<DataSource>tmxProjInvoiceTransWithRetainedView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>ProjContractId</Name>
+			<DataField>ProjContractId</DataField>
+			<DataSource>tmxProjInvoiceTransWithRetainedView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>ProjId</Name>
+			<DataField>ProjId</DataField>
+			<DataSource>tmxProjInvoiceTransWithRetainedView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>ProjInvoiceId</Name>
+			<DataField>ProjInvoiceId</DataField>
+			<DataSource>tmxProjInvoiceTransWithRetainedView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>RetainedNow</Name>
+			<DataField>RetainedNow</DataField>
+			<DataSource>tmxProjInvoiceTransWithRetainedView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>ProjIdParent</Name>
+			<DataField>ProjIdParent</DataField>
+			<DataSource>tmxProjParentNameView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>ProjName</Name>
+			<DataField>Name</DataField>
+			<DataSource>tmxProjParentNameView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>ProjNameParent</Name>
+			<DataField>ProjNameParent</DataField>
+			<DataSource>tmxProjParentNameView</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>ProjContractDescription</Name>
+			<DataField>Description</DataField>
+			<DataSource>ProjInvoiceTable</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>ProjContractName</Name>
+			<Label>@SYS300250</Label>
+			<DataField>Name</DataField>
+			<DataSource>ProjInvoiceTable</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>CustName</Name>
+			<Label>@SYS27874</Label>
+			<DataField>Name</DataField>
+			<DataSource>CustAccountName</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>CompanyName</Name>
+			<Label>@SYS15581</Label>
+			<DataField>name</DataField>
+			<DataSource>DataArea</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldComputedInt">
+			<Name>Year</Name>
+			<ExtendedDataType>Year</ExtendedDataType>
+			<ViewMethod>invoiceDateYear</ViewMethod>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldComputedEnum">
+			<Name>MonthsOfYear</Name>
+			<ViewMethod>invoiceDateMonth</ViewMethod>
+			<EnumType>MonthsOfYear</EnumType>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldComputedReal">
+			<Name>AmountRetained</Name>
+			<ExtendedDataType>AmountMST</ExtendedDataType>
+			<ViewMethod>retainedNowNotNull</ViewMethod>
+		</AxViewField>
+	</Fields>
+	<Indexes />
+	<Mappings />
+	<Relations />
+	<StateMachines />
+	<ViewMetadata>
+		<Name>Metadata</Name>
+		<SourceCode>
+			<Methods />
+		</SourceCode>
+		<AllowCrossCompany>Yes</AllowCrossCompany>
+		<DataSources />
+	</ViewMetadata>
+</AxView>

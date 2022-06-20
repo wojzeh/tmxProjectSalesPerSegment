@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxQuery xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns=""
+	i:type="AxQuerySimple">
+	<Name>tmxProjInvoiceCostQuery</Name>
+	<SourceCode>
+		<Methods>
+			<Method>
+				<Name>classDeclaration</Name>
+				<Source><![CDATA[
+    [Query]
+    public class tmxProjInvoiceCostQuery extends QueryRun
+    {
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+	<AllowCrossCompany>Yes</AllowCrossCompany>
+	<DataSources>
+		<AxQuerySimpleRootDataSource>
+			<Name>ProjInvoiceCost</Name>
+			<DynamicFields>Yes</DynamicFields>
+			<Table>ProjInvoiceCost</Table>
+			<DataSources>
+				<AxQuerySimpleEmbeddedDataSource>
+					<Name>ProjInvoiceJour</Name>
+					<DynamicFields>Yes</DynamicFields>
+					<Table>ProjInvoiceJour</Table>
+					<DataSources />
+					<DerivedDataSources />
+					<Fields />
+					<Ranges />
+					<Relations>
+						<AxQuerySimpleDataSourceRelation>
+							<Name>QueryDataSourceRelation1Copy1</Name>
+							<Field>ProjInvoiceId</Field>
+							<JoinDataSource>ProjInvoiceCost</JoinDataSource>
+							<RelatedField>ProjInvoiceId</RelatedField>
+						</AxQuerySimpleDataSourceRelation>
+						<AxQuerySimpleDataSourceRelation>
+							<Name>QueryDataSourceRelation1Copy2</Name>
+							<Field>InvoiceDate</Field>
+							<JoinDataSource>ProjInvoiceCost</JoinDataSource>
+							<RelatedField>InvoiceDate</RelatedField>
+						</AxQuerySimpleDataSourceRelation>
+					</Relations>
+				</AxQuerySimpleEmbeddedDataSource>
+				<AxQuerySimpleEmbeddedDataSource>
+					<Name>ProjInvoiceCostDetail</Name>
+					<DynamicFields>Yes</DynamicFields>
+					<Table>ProjInvoiceCostDetail</Table>
+					<DataSources />
+					<DerivedDataSources />
+					<Fields />
+					<Ranges />
+					<Relations>
+						<AxQuerySimpleDataSourceRelation>
+							<Name>QueryDataSourceRelation1</Name>
+							<Field>RecId</Field>
+							<JoinDataSource>ProjInvoiceCost</JoinDataSource>
+							<RelatedField>InvoiceRefRecId</RelatedField>
+						</AxQuerySimpleDataSourceRelation>
+					</Relations>
+				</AxQuerySimpleEmbeddedDataSource>
+			</DataSources>
+			<DerivedDataSources />
+			<Fields />
+			<Ranges />
+			<GroupBy />
+			<Having />
+			<OrderBy />
+		</AxQuerySimpleRootDataSource>
+	</DataSources>
+</AxQuery>

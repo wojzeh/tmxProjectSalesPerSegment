@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxView xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>tmxProjInvoiceOnAccView</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class tmxProjInvoiceOnAccView extends common
+{
+}
+
+]]></Declaration>
+		<Methods />
+	</SourceCode>
+	<SubscriberAccessLevel>
+		<Read>Allow</Read>
+	</SubscriberAccessLevel>
+	<Query>tmxProjInvoiceOnAccQuery</Query>
+	<FieldGroups>
+		<AxTableFieldGroup>
+			<Name>AutoReport</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoLookup</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoIdentification</Name>
+			<AutoPopulate>Yes</AutoPopulate>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoSummary</Name>
+			<Fields />
+		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>AutoBrowse</Name>
+			<Fields />
+		</AxTableFieldGroup>
+	</FieldGroups>
+	<Fields>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>InvoiceDate</Name>
+			<DataField>InvoiceDate</DataField>
+			<DataSource>ProjInvoiceJour</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>ProjInvoiceId</Name>
+			<DataField>ProjInvoiceId</DataField>
+			<DataSource>ProjInvoiceJour</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>LedgerVoucher</Name>
+			<DataField>LedgerVoucher</DataField>
+			<DataSource>ProjInvoiceJour</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>DefaultDimension</Name>
+			<DataField>DefaultDimension</DataField>
+			<DataSource>ProjInvoiceOnAcc</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>CurrencyCode</Name>
+			<DataField>CurrencyId</DataField>
+			<DataSource>ProjInvoiceOnAcc</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>Amount</Name>
+			<DataField>Amount</DataField>
+			<DataSource>ProjInvoiceOnAccDetail</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>ProjContractId</Name>
+			<DataField>ProjInvoiceProjId</DataField>
+			<DataSource>ProjInvoiceJour</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>CustAccountNum</Name>
+			<DataField>InvoiceAccount</DataField>
+			<DataSource>ProjInvoiceJour</DataSource>
+		</AxViewField>
+		<AxViewField xmlns=""
+			i:type="AxViewFieldBound">
+			<Name>ProjId</Name>
+			<DataField>ProjId</DataField>
+			<DataSource>ProjInvoiceOnAcc</DataSource>
+		</AxViewField>
+	</Fields>
+	<Indexes />
+	<Mappings />
+	<Relations />
+	<StateMachines />
+	<ViewMetadata>
+		<Name>Metadata</Name>
+		<SourceCode>
+			<Methods />
+		</SourceCode>
+		<AllowCrossCompany>Yes</AllowCrossCompany>
+		<DataSources />
+	</ViewMetadata>
+</AxView>

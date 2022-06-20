@@ -1,0 +1,30 @@
+﻿ProjSalesReports=Project Sales by segment report
+ ;FDD-089
+SalesBySegmentHoldBack=Holdback
+ ;FDD-089
+SalesBySegmentHoldMisc=Misc
+ ;FDD-089
+SalesBySegmentHoldTotalSales=Total sales
+ ;FDD-089
+SalesBySegmentReport=Project Sales by segment
+ ;FDD-089
+SalesBySegmentReportByInvoice=by invoice
+ ;FDD-089
+SalesBySegmentReportByMonth=by month
+ ;FDD-089
+SalesBySegmentReportGenerate=Print Project Sales by segment report
+ ;FDD-089
+SalesBySegmentReportPeriod=Invoices from %1 to %2
+ ;FDD-089
+SalesBySegmentReportTitle=PROJECT INVOICE SUMMARY REPORT
+ ;FDD-089
+SalesBySegmentReportTypeHelp=Group invoices by month
+ ;FDD-089
+SalesBySegmentSelectedProjGroup=Project groups for Project Sales by segment report
+ ;FDD-089
+SalesBySegmentSelectedProjGroupDelete=Maintain Project groups for Project Sales by segment report
+ ;FDD-089
+SalesBySegmentSelectedProjGroupOrderHelp=In what order Project groups must be printed in Project Sales by segment report
+ ;FDD-089
+SalesBySegmentSelectedProjGroupRead=View Project groups for Project Sales by segment report
+ ;FDD-089

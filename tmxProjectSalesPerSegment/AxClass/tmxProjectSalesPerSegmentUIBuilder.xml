@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>tmxProjectSalesPerSegmentUIBuilder</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// The <c>tmxProjectSalesPerSegmentUIBuilder</c> class is used to control the report dialog UI for the
+/// <c>tmxProjectSalesPerSegment</c> report.
+/// </summary>
+public class tmxProjectSalesPerSegmentUIBuilder extends SrsReportDataContractUIBuilder
+{
+    #define.showFields(false)
+    #define.enableFields(false)
+    tmxProjectSalesPerSegmentContract   dc;
+    // Legal entity lookup controls
+    FormStringControl           dialogLegalEntitySelection;
+    LedgerLegalEntityLookup     legalEntityLookup;
+    int                         dialogLegalEntityLookupId;
+    str                         userLegalEntityRange;
+    container                   legalEntityOptions;
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>setEnabledVisible</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Sets visibility and enable dialog field control
+    /// </summary>
+    /// <param name = "_df">Dialog field</param>
+    /// <param name = "_enabled">if enebaled</param>
+    /// <param name = "_visible">if visible</param>
+    private void setEnabledVisible(DialogField _df, boolean _enabled = #enableFields, boolean _visible = #showFields)
+    {
+        if (_df)
+        {
+            _df.enabled(_enabled);
+            _df.visible(_visible);
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>postBuild</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Override this method in order to initialize the dialog fields after the fields are built.
+    /// </summary>
+    public void postBuild()
+    {
+        DialogField dialogField;
+
+        super();
+        // parmPrimaryDimensionFocus
+        dialogField = this.bindInfo().getDialogField(this.dataContractObject(), methodStr(tmxProjectSalesPerSegmentContract, parmPrimaryDimensionFocus));
+        this.setEnabledVisible(dialogField);
+        // parmReportTitle
+        dialogField = this.bindInfo().getDialogField(this.dataContractObject(), methodStr(tmxProjectSalesPerSegmentContract, parmReportTitle));
+        this.setEnabledVisible(dialogField);
+        // parmReportCompany
+        dialogField = this.bindInfo().getDialogField(this.dataContractObject(), methodStr(tmxProjectSalesPerSegmentContract, parmReportCompany));
+        this.setEnabledVisible(dialogField);
+        // parmCompanySelection
+        dialogField = this.bindInfo().getDialogField(this.dataContractObject(), methodStr(tmxProjectSalesPerSegmentContract, parmLegalEntityOptions));
+        this.setEnabledVisible(dialogField);
+
+        this.constructLegalEntityControl(dialog);
+        
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>postRun</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// post runs
+    /// </summary>
+    public void postRun()
+    {
+        super();
+        
+        this.constructLegalEntityLookup(dialog);
+        Set userLegalEntitySet = LedgerSecurityHelper::ledgersWithMinimumSecurityAccess(menuItemActionStr(LedgerExchAdj), AccessRight::Edit, MenuItemType::Action);
+        userLegalEntityRange = LedgerLegalEntityLookup::getLegalEntityRangeFromLegalEntitySet(userLegalEntitySet);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>constructLegalEntityControl</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Contstruct
+    /// </summary>
+    /// <param name = "_dialog">Dialog</param>
+    private void constructLegalEntityControl(Dialog _dialog)
+    {
+        FormBuildGroupControl currentGroup = _dialog.form().design().control(_dialog.curFormGroup().name());
+        FormBuildStringControl dialogLegalEntityLookup = currentGroup.addControl(FormControlType::String, 'LegalEntityLookup');
+        dialogLegalEntityLookup.extendedDataType(extendedTypeNum(LedgerLegalEntitySelection));
+        dialogLegalEntityLookup.lookupOnly(true);
+        dialogLegalEntityLookupId = dialogLegalEntityLookup.id();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>legalEntityLookup</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Constructs the lookup for the legal entity selection.
+    /// </summary>
+    /// <param name = "_control">The <c>FormStringControl</c> object.</param>
+    private void legalEntityLookup(FormStringControl _control)
+    {
+        legalEntityLookup.lookup(_control.text(), userLegalEntityRange);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>constructLegalEntityLookup</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Lookup override
+    /// </summary>
+    /// <param name = "_dialog">dialog</param>
+    private void constructLegalEntityLookup(Dialog _dialog)
+    {
+        dialoglegalEntitySelection = _dialog.formRun().design().control(dialogLegalEntityLookupId);
+        legalEntityLookup = LedgerLegalEntityLookup::construct(_dialog.formRun(), dialoglegalEntitySelection);
+        // populates it from the packed paramater
+        legalEntityLookup.setSelection(str2con(dc.parmLegalEntityOptions()));
+        // let's have our own lookup
+        dialoglegalEntitySelection.registerOverrideMethod(methodstr(FormStringControl, lookup), methodstr(tmxProjectSalesPerSegmentUIBuilder, legalEntityLookup), this);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>preBuild</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// prebuilds
+    /// </summary>
+    public void preBuild()
+    {
+        dc = this.dataContractObject() as tmxProjectSalesPerSegmentContract;
+        super();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getFromDialog</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Gets it back from the dialog
+    /// </summary>
+    public void getFromDialog()
+    {
+        super();
+        dc.parmLegalEntityOptions(con2Str(legalEntityLookup.getLegalEntitySelection()));
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxLabelFile xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>tmxProjectSalesPerSegment_en-CA</Name>
+	<LabelContentFileName>tmxProjectSalesPerSegment.en-CA.label.txt</LabelContentFileName>
+	<LabelFileId>tmxProjectSalesPerSegment</LabelFileId>
+	<Language>en-CA</Language>
+	<RelativeUriInModelStore>tmxProjectSalesPerSegment\tmxProjectSalesPerSegment\AxLabelFile\LabelResources\en-CA\tmxProjectSalesPerSegment.en-CA.label.txt</RelativeUriInModelStore>
+</AxLabelFile>
